@@ -1,0 +1,4 @@
+> Task :app:assembleRelease FAILED
+Execution failed for task ':app:validateSigningRelease'.
+> Keystore file '/home/runner/work/app/release.jks' not found for signing config 'release'.
+Error: No files were found with the provided path: app/build/outputs/apk/release/*.apk
