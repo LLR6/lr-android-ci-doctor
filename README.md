@@ -1,25 +1,69 @@
-# Android CI Doctor 🩺
+# Android CI Doctor
 
-> 把一大段 Android / Gradle / GitHub Actions 构建日志压缩成**带行号的故障线索**。本地运行、无模型 API、无日志上传。
+<p align="center"><img src="./docs/media/social-preview.svg" alt="Android CI Doctor — Make build failures legible" width="100%"></p>
 
-**搜这个问题的人通常刚遇到：** `Keystore file not found`、`No files were found with the provided path`、`Unsupported class file major version`。这个工具把它们分别定位到签名、产物上传、JDK 兼容性，并保留原日志证据。
+<p align="center"><img src="./docs/media/cli-demo.gif" alt="真实示例：读取构建日志、定位签名错误与 APK 产物路径" width="100%"></p>
+<p align="center"><sub>示例来自仓库自带的 build.log；画面为便于阅读的节选。</sub></p>
+
+<p align="center"><strong>构建失败时，先找到哪一行、为什么、下一步查什么。</strong></p>
+<p align="center">本地分析 Android / Gradle / GitHub Actions 日志；保留证据行号，不上传日志。</p>
+<p align="center"><a href="#30-秒看懂">30 秒看懂</a> · <a href="#5-分钟开始">5 分钟开始</a> · <a href="#能力与边界">能力与边界</a></p>
+<p align="center"><img alt="Test" src="https://github.com/LLR6/lr-android-ci-doctor/actions/workflows/test.yml/badge.svg"> <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-blue"> <img alt="MIT" src="https://img.shields.io/badge/license-MIT-green"> <img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-8b5cf6"></p>
+
+## 30 秒看懂
+
+当 CI 只给你几千行日志时，直接搜索 `Keystore file not found` 或 `No files were found with the provided path` 往往还要手工猜根因。这个工具把常见信号整理成 **规则 ID → 原日志行号 → 去敏证据 → 检查建议**。
+
+```text
+本地日志 → 规则扫描 → 带行号的证据 → Markdown / JSON
+```
+
+## 30 秒试玩
+
+在仓库根目录运行，无需模型 API：
 
 ```bash
 python -m pip install -e .
 android-ci-doctor examples/build.log
-android-ci-doctor examples/build.log --format json --fail-on-findings
 ```
 
-示例会命中 `SIGN-01` 和 `APK-01`，显示原始行号、脱敏后的日志片段和下一步检查建议。`--fail-on-findings` 在命中时退出码为 2，方便放在 CI 中做检查。也能通过 `cat build.log | android-ci-doctor -` 使用。
+示例输出节选（来自 `examples/build.log`）：
 
-## 设计边界
+```text
+SIGN-01 · 签名配置缺失
+L3: Keystore file '/home/runner/work/app/release.jks' not found
 
-- 只做规则匹配，**不声称自动修复**或诊断所有 Gradle 失败；同一日志可能有根因和连带错误，建议从最早失败处查起。
-- 自动遮盖常见 Bearer Token、口令赋值和 GitHub token；脱敏不是安全边界，公开日志前仍需人工检查。
-- 不执行日志中的命令，不访问网络。可用 `python -m unittest discover -s tests` 运行测试。
+APK-01 · 产物路径不匹配
+L4: No files were found with the provided path: app/build/outputs/apk/release/*.apk
+```
 
-## 适合参与的改进
+## 三个值得看的点
 
-欢迎提交**已经去敏**的失败片段、预期规则和实际结果。新增规则请给一段会命中的样例和一段不应误报的反例。路线图：Gradle 版本矩阵核验、因果链排序、SARIF 输出。
+- **证据回溯**：规则命中保留原行号，让你能回到完整日志核对上下文。
+- **本地与去敏**：离线运行，输出遮盖常见 Token 与口令；公开前仍需人工检查。
+- **接入 CI**：`--format json` 方便脚本处理；`--fail-on-findings` 命中时退出码为 2。
+
+## 5 分钟开始
+
+要求 Python 3.10+。
+
+```bash
+git clone https://github.com/LLR6/lr-android-ci-doctor.git
+cd lr-android-ci-doctor
+python -m pip install -e .
+android-ci-doctor examples/build.log
+android-ci-doctor examples/build.log --format json --fail-on-findings
+cat examples/build.log | android-ci-doctor -
+```
+
+最后一条是 Linux / macOS 的管道示例；Windows 可直接传入文件路径。`--fail-on-findings` 的退出码 2 表示命中线索，并不代表程序崩溃。
+
+## 能力与边界
+
+识别 JDK、SDK、依赖、签名、缓存、测试与 APK 路径等常见失败信号。**规则匹配不是自动修复，也不能替代对最早失败信息的检查**。根因与连带错误可能同时命中；不要把每条命中都当作独立故障。脱敏不是安全边界；不会执行日志里的命令，也不会访问网络。
+
+## 参与 / Help Wanted
+
+欢迎提交**已经去敏**的失败片段，并标注预期规则和误报反例。下一步可做 Gradle 版本矩阵核验、因果链排序与 SARIF 输出。验证代码：`python -m unittest discover -s tests`。
 
 作者：LLR6 · MIT License
