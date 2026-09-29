@@ -129,6 +129,14 @@ CI 会对每份日志重新运行分析器，并要求实际 Rule ID 与期望�
 - [LR-Agent](https://github.com/LLR6/LR-agent) — broader automation and reliability experiments.
 <!-- LR-RELATED:END -->
 
+<!-- LR-ENGINEERING-REF:START -->
+## Engineering Reference
+
+[Architecture](docs/ARCHITECTURE.md) · [Triage model](docs/TRIAGE_MODEL.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Report schema](schemas/report.schema.json)
+
+These files document the project's architecture, safety boundaries, reproducibility assumptions and release process.
+<!-- LR-ENGINEERING-REF:END -->
+
 <!-- LR-LAB-FOOTER:START -->
 ---
 <p align="center"><sub>Part of <a href="https://github.com/LLR6">LR Lab</a> · Security × AI × Android × Automation</sub><br><sub>Build things that are useful, inspectable, and reproducible.</sub></p>
