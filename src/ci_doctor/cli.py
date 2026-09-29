@@ -4,6 +4,14 @@ import re
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from importlib.metadata import PackageNotFoundError, version
+
+def package_version():
+    try:
+        return version("lr-android-ci-doctor")
+    except PackageNotFoundError:
+        return "dev"
+
 
 
 @dataclass(frozen=True)
