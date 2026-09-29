@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 - 2026-09-29
 
 ### Added
 - Finding priority, first evidence line and occurrence count.
