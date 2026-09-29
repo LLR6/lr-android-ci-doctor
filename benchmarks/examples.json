@@ -25,6 +25,10 @@
       "expected": [
         "TEST-01"
       ]
+    },
+    {
+      "file": "success.log",
+      "expected": []
     }
   ]
 }
