@@ -1,0 +1,30 @@
+{
+  "schema": "lr-ci-doctor-example-benchmark/v1",
+  "cases": [
+    {
+      "file": "build.log",
+      "expected": [
+        "SIGN-01",
+        "APK-01"
+      ]
+    },
+    {
+      "file": "jdk-mismatch.log",
+      "expected": [
+        "JDK-01"
+      ]
+    },
+    {
+      "file": "dependency-resolution.log",
+      "expected": [
+        "GRADLE-01"
+      ]
+    },
+    {
+      "file": "test-failure.log",
+      "expected": [
+        "TEST-01"
+      ]
+    }
+  ]
+}
