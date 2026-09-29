@@ -106,6 +106,22 @@ android-ci-doctor examples/build.log --context 2
 
 <!-- LR-CONTENT-UPGRADE:END -->
 
+<!-- LR-DEEP-CONTENT:START -->
+### Labeled log benchmark
+
+`benchmarks/examples.json` 给合成构建日志标注了预期 finding：
+
+- signing + missing artifact；
+- JDK mismatch；
+- dependency resolution；
+- unit-test failure。
+
+CI 会对每份日志重新运行分析器，并要求实际 Rule ID 与期望集合一致。
+
+这能防止一个很常见的问题：为了支持新错误模式不断加正则，结果旧规则开始误命中或漏命中。
+<!-- LR-DEEP-CONTENT:END -->
+
+
 <!-- LR-RELATED:START -->
 ### Related LR Lab projects
 - [LR-Tablet](https://github.com/LLR6/LR-Tablet) — Android tablet project with reproducible CI builds.
