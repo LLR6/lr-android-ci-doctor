@@ -17,8 +17,8 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e .
@@ -59,7 +59,7 @@ jobs:
           /tmp/lr-wheel-smoke/bin/python -m pip install --upgrade pip
           /tmp/lr-wheel-smoke/bin/python -m pip install dist/*.whl
           /tmp/lr-wheel-smoke/bin/android-ci-doctor --version
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: ci-doctor-example-benchmark-${{ matrix.python-version }}
