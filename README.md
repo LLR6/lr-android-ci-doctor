@@ -1,5 +1,17 @@
 # Android CI Doctor
 
+<!-- LR-LAB-CHROME:START -->
+<p align="center">
+  <a href="https://github.com/LLR6"><img alt="LR Lab" src="https://img.shields.io/badge/LR_LAB-0x4C52-0D1117?style=for-the-badge&logo=github&logoColor=white"></a>
+  <img alt="DEV TOOL" src="https://img.shields.io/badge/DEV_TOOL-3B82F6?style=for-the-badge">
+</p>
+<p align="center"><strong>Make build failures legible.</strong><br><sub>Local Android / Gradle / CI log diagnosis</sub></p>
+<p align="center"><a href="https://github.com/LLR6/lr-android-ci-doctor/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/LLR6/lr-android-ci-doctor?style=flat-square&logo=github&label=stars"></a>
+  <img alt="Last commit" src="https://img.shields.io/github/last-commit/LLR6/lr-android-ci-doctor?style=flat-square"> <img alt="Maintained" src="https://img.shields.io/badge/status-active-success?style=flat-square"></p>
+<p align="center"><a href="https://github.com/LLR6">Profile</a> · <a href="https://github.com/LLR6?tab=repositories">All projects</a> · <a href="https://github.com/LLR6/lr-android-ci-doctor/issues">Issues</a></p>
+<!-- LR-LAB-CHROME:END -->
+
+
 <p align="center"><img src="./docs/media/social-preview.svg" alt="Android CI Doctor — Make build failures legible" width="100%"></p>
 
 <p align="center"><img src="./docs/media/cli-demo.gif" alt="真实示例：读取构建日志、定位签名错误与 APK 产物路径" width="100%"></p>
@@ -67,3 +79,9 @@ cat examples/build.log | android-ci-doctor -
 欢迎提交**已经去敏**的失败片段，并标注预期规则和误报反例。下一步可做 Gradle 版本矩阵核验、因果链排序与 SARIF 输出。验证代码：`python -m unittest discover -s tests`。
 
 作者：LLR6 · MIT License
+
+<!-- LR-LAB-FOOTER:START -->
+---
+<p align="center"><sub>Part of <a href="https://github.com/LLR6">LR Lab</a> · Security × AI × Android × Automation</sub><br><sub>Build things that are useful, inspectable, and reproducible.</sub></p>
+<!-- LR-LAB-FOOTER:END -->
+
