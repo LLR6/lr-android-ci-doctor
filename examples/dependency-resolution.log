@@ -1,0 +1,8 @@
+> Task :app:checkDebugAarMetadata FAILED
+
+Could not resolve all files for configuration ':app:debugRuntimeClasspath'.
+Could not find com.example:missing-library:9.9.9.
+Searched in the following locations:
+  - https://repo1.maven.org/maven2/com/example/missing-library/9.9.9/missing-library-9.9.9.pom
+
+FAILURE: Build failed with an exception.
