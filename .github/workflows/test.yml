@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e .
+      - name: Compile package
+        run: python -m compileall -q src/ci_doctor
+      - name: Smoke-test installed CLI
+        run: android-ci-doctor --help > /dev/null
       - run: python -m pip install "jsonschema>=4.23"
       - name: CLI version smoke test
         run: android-ci-doctor --version
