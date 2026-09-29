@@ -1,0 +1,5 @@
+> Task :app:compileDebugJavaWithJavac FAILED
+Execution failed for task ':app:compileDebugJavaWithJavac'.
+> Unsupported class file major version 67
+
+FAILURE: Build failed with an exception.
