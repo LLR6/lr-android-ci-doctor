@@ -25,6 +25,16 @@ jobs:
       - name: CLI version smoke test
         run: android-ci-doctor --version
       - run: python -m unittest discover -s tests -v
+      - name: Compile package
+        run: python -m compileall -q src
+      - name: Build wheel
+        run: python -m pip wheel . --no-deps -w dist
+      - name: Validate JSON Schemas
+        shell: bash
+        run: |
+          if compgen -G "schemas/*.json" > /dev/null; then
+            for f in schemas/*.json; do python -m json.tool "$f" > /dev/null; done
+          fi
       - name: Evaluate example logs
         run: python scripts/evaluate_examples.py benchmarks/examples.json --output example-benchmark.json --fail-on-regression
       - name: Hash example benchmark
