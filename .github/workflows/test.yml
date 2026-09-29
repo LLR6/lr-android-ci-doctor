@@ -34,6 +34,12 @@ jobs:
       - name: CLI version smoke test
         run: android-ci-doctor --version
       - run: python -m unittest discover -s tests -v
+      - name: Coverage snapshot
+        run: |
+          python -m pip install "coverage>=7.6"
+          coverage run --source=src/ci_doctor -m unittest discover -s tests -v
+          coverage report -m --fail-under=50
+          coverage xml -o coverage.xml
       - name: Compile package
         run: python -m compileall -q src
       - name: Build wheel
