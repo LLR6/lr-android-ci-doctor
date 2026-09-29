@@ -115,6 +115,7 @@ def markdown(path: str, findings: list[dict]) -> str:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="离线分析 Android / Gradle CI 构建日志")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {package_version()}")
     parser.add_argument("log", help="UTF-8 日志路径；使用 - 从 stdin 读取")
     parser.add_argument("--format", choices=("md", "json"), default="md")
     parser.add_argument("--fail-on-findings", action="store_true", help="发现规则命中时返回退出码 2")
