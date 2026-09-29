@@ -1,0 +1,4 @@
+> Task :app:testDebugUnitTest FAILED
+There were failing tests. See the report at: file:///home/runner/work/app/app/build/reports/tests/testDebugUnitTest/index.html
+Execution failed for task ':app:testDebugUnitTest'.
+> There were failing tests.
