@@ -9,6 +9,14 @@ description = "Offline evidence-first triage for Android Gradle and GitHub Actio
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "LLR6"}]
+license = {file = "LICENSE"}
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
+]
 keywords = ["android", "gradle", "ci", "github-actions", "diagnostics"]
 
 [project.scripts]
