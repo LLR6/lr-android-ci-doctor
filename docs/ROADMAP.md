@@ -1,18 +1,30 @@
 # Roadmap
 
-## Near term
+## Current foundation
 
-- Add AGP/Kotlin compatibility fixtures.
-- Add multi-line `Caused by` chain extraction.
-- Separate upstream-cause findings from downstream symptoms.
-- Add clean-log negative fixtures from more build phases.
+- Evidence-first Android / Gradle log analysis
+- Signing, JDK, SDK, dependency, test and artifact rules
+- Priority / first-line / occurrence metadata
+- Redacted context windows
+- Labeled example-log benchmark
+- CI regression gate
 
-## Medium term
+## Next
 
-- Build causal chains between findings.
-- Add structured environment metadata extraction.
-- Support Gradle configuration-cache and dependency-lock diagnostics.
+- multi-line exception-chain grouping;
+- Gradle task dependency context;
+- root-cause candidate graph;
+- more Kotlin / AGP compatibility fixtures;
+- SARIF output.
+
+## Later
+
+- GitHub Actions annotation output;
+- machine-readable remediation references;
+- rule-pack versioning.
 
 ## Non-goals
 
-No automatic mutation of Gradle files, signing credentials or CI secrets.
+- editing Gradle files automatically;
+- changing signing credentials;
+- uploading build logs to remote services.
