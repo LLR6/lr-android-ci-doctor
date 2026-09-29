@@ -11,6 +11,10 @@
 <p align="center"><a href="https://github.com/LLR6">Profile</a> · <a href="https://github.com/LLR6?tab=repositories">All projects</a> · <a href="https://github.com/LLR6/lr-android-ci-doctor/issues">Issues</a></p>
 <!-- LR-LAB-CHROME:END -->
 
+<!-- LR-FAMILY-NAV:START -->
+<p align="center"><a href="#30-秒试玩">30-second demo</a> · <a href="./examples">Examples</a> · <a href="./src">Source</a> · <a href="./tests">Tests</a></p>
+<!-- LR-FAMILY-NAV:END -->
+
 
 <p align="center"><img src="./docs/media/social-preview.svg" alt="Android CI Doctor — Make build failures legible" width="100%"></p>
 
@@ -79,6 +83,13 @@ cat examples/build.log | android-ci-doctor -
 欢迎提交**已经去敏**的失败片段，并标注预期规则和误报反例。下一步可做 Gradle 版本矩阵核验、因果链排序与 SARIF 输出。验证代码：`python -m unittest discover -s tests`。
 
 作者：LLR6 · MIT License
+
+<!-- LR-RELATED:START -->
+### Related LR Lab projects
+- [LR-Tablet](https://github.com/LLR6/LR-Tablet) — Android tablet project with reproducible CI builds.
+- [CTF Tracebook](https://github.com/LLR6/lr-ctf-tracebook) — another small evidence-first local CLI tool.
+- [LR-Agent](https://github.com/LLR6/LR-agent) — broader automation and reliability experiments.
+<!-- LR-RELATED:END -->
 
 <!-- LR-LAB-FOOTER:START -->
 ---
