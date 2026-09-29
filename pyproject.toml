@@ -6,10 +6,18 @@ build-backend = "setuptools.build_meta"
 name = "lr-android-ci-doctor"
 version = "0.1.0"
 description = "Offline evidence-first triage for Android Gradle and GitHub Actions logs"
+readme = "README.md"
 requires-python = ">=3.10"
+authors = [{name = "LLR6"}]
+keywords = ["android", "gradle", "ci", "github-actions", "diagnostics"]
 
 [project.scripts]
 android-ci-doctor = "ci_doctor.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/LLR6/lr-android-ci-doctor"
+Repository = "https://github.com/LLR6/lr-android-ci-doctor"
+Issues = "https://github.com/LLR6/lr-android-ci-doctor/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
