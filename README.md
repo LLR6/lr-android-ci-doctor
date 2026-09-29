@@ -11,6 +11,11 @@
 <p align="center"><a href="https://github.com/LLR6">Profile</a> · <a href="https://github.com/LLR6?tab=repositories">All projects</a> · <a href="https://github.com/LLR6/lr-android-ci-doctor/issues">Issues</a></p>
 <!-- LR-LAB-CHROME:END -->
 
+<!-- LR-PROJECT-DOCS:START -->
+### Project docs
+[Architecture](./docs/ARCHITECTURE.md) · [Benchmarks](./docs/BENCHMARKS.md) · [Triage model](./docs/TRIAGE_MODEL.md) · [Roadmap](./docs/ROADMAP.md) · [Releasing](./docs/RELEASING.md) · [Security](./SECURITY.md)
+<!-- LR-PROJECT-DOCS:END -->
+
 <!-- LR-FAMILY-NAV:START -->
 <p align="center"><a href="#30-秒试玩">30-second demo</a> · <a href="./examples">Examples</a> · <a href="./src">Source</a> · <a href="./tests">Tests</a></p>
 <!-- LR-FAMILY-NAV:END -->
