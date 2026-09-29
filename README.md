@@ -84,6 +84,28 @@ cat examples/build.log | android-ci-doctor -
 
 作者：LLR6 · MIT License
 
+<!-- LR-CONTENT-UPGRADE:START -->
+## v0.2：不只告诉你“命中了什么”，还告诉你先看哪里
+
+Finding 现在包含：
+
+- `first_line`：第一次出现证据的位置；
+- `occurrences`：同类信号出现次数；
+- `priority`：排查优先度；
+- `evidence`：脱敏后的命中内容。
+
+还可以带上下文：
+
+```bash
+android-ci-doctor examples/build.log --context 2
+```
+
+工具按**首次出现位置优先**排序 finding。这样一个上游构建/签名错误后面引发的 “APK artifact not found”，不会因为最终报错更醒目就被误当成第一排查点。
+
+上下文同样经过 token/password 脱敏。设计说明见 [docs/TRIAGE_MODEL.md](docs/TRIAGE_MODEL.md)。
+
+<!-- LR-CONTENT-UPGRADE:END -->
+
 <!-- LR-RELATED:START -->
 ### Related LR Lab projects
 - [LR-Tablet](https://github.com/LLR6/LR-Tablet) — Android tablet project with reproducible CI builds.
