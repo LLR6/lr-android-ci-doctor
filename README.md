@@ -1,26 +1,16 @@
 # Android CI Doctor
 
-<!-- LR-LAB-CHROME:START -->
-<p align="center">
-  <a href="https://github.com/LLR6"><img alt="LR Lab" src="https://img.shields.io/badge/LR_LAB-0x4C52-0D1117?style=for-the-badge&logo=github&logoColor=white"></a>
-  <img alt="DEV TOOL" src="https://img.shields.io/badge/DEV_TOOL-3B82F6?style=for-the-badge">
-</p>
-<p align="center"><strong>Make build failures legible.</strong><br><sub>Local Android / Gradle / CI log diagnosis</sub></p>
-<p align="center"><a href="https://github.com/LLR6/lr-android-ci-doctor/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/LLR6/lr-android-ci-doctor?style=flat-square&logo=github&label=stars"></a>
-  <img alt="Last commit" src="https://img.shields.io/github/last-commit/LLR6/lr-android-ci-doctor?style=flat-square"> <img alt="Maintained" src="https://img.shields.io/badge/status-active-success?style=flat-square"></p>
-<p align="center"><a href="https://github.com/LLR6">Profile</a> · <a href="https://github.com/LLR6?tab=repositories">All projects</a> · <a href="https://github.com/LLR6/lr-android-ci-doctor/issues">Issues</a></p>
-<!-- LR-LAB-CHROME:END -->
+### 几千行构建日志，从哪一行开始查？
 
-<!-- LR-PROJECT-DOCS:START -->
-### Project docs
-[Architecture](./docs/ARCHITECTURE.md) · [Benchmarks](./docs/BENCHMARKS.md) · [Triage model](./docs/TRIAGE_MODEL.md) · [Roadmap](./docs/ROADMAP.md) · [Compatibility](./docs/COMPATIBILITY.md) · [Releasing](./docs/RELEASING.md) · [Security](./SECURITY.md) · [Support](./SUPPORT.md)
- · [Change risk](./docs/CHANGE_RISK.md) · [Failure modes](./docs/FAILURE_MODES.md)
-<!-- LR-PROJECT-DOCS:END -->
+把 Android / Gradle / CI 日志整理成带源行号、上下文和排查建议的报告。适合 APK 构建、签名配置和产物上传失败时快速缩小排查范围。
 
-<!-- LR-FAMILY-NAV:START -->
-<p align="center"><a href="#30-秒试玩">30-second demo</a> · <a href="./examples">Examples</a> · <a href="./src">Source</a> · <a href="./tests">Tests</a></p>
-<!-- LR-FAMILY-NAV:END -->
+[快速体验](#30-秒试玩) · [实跑案例](docs/DEMO.md) · [完整输出](examples/showcase/output.json) · [反馈问题](https://github.com/LLR6/lr-android-ci-doctor/issues)
 
+| 你的场景 | 可以先试什么 |
+| --- | --- |
+| 签名失败后又报 APK 不存在 | 先看首次命中的签名证据，再核查产物路径 |
+| 想把日志分析接入流水线 | JSON 输出；命中时可返回退出码 2 |
+| 需要给同事说明排查依据 | 附原行号和已去敏的上下文 |
 
 <p align="center"><img src="./docs/media/social-preview.svg" alt="Android CI Doctor — Make build failures legible" width="100%"></p>
 
@@ -30,7 +20,7 @@
 <p align="center"><strong>构建失败时，先找到哪一行、为什么、下一步查什么。</strong></p>
 <p align="center">本地分析 Android / Gradle / GitHub Actions 日志；保留证据行号，不上传日志。</p>
 <p align="center"><a href="#30-秒看懂">30 秒看懂</a> · <a href="#5-分钟开始">5 分钟开始</a> · <a href="#能力与边界">能力与边界</a></p>
-<p align="center"><img alt="Test" src="https://github.com/LLR6/lr-android-ci-doctor/actions/workflows/test.yml/badge.svg"> <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-blue"> <img alt="MIT" src="https://img.shields.io/badge/license-MIT-green"> <img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-8b5cf6"></p>
+<p align="center"><img alt="Test" src="https://github.com/LLR6/lr-android-ci-doctor/actions/workflows/test.yml/badge.svg"> <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-blue"> <img alt="MIT" src="https://img.shields.io/badge/license-MIT-green"> </p>
 
 ## 30 秒看懂
 
@@ -84,6 +74,13 @@ cat examples/build.log | android-ci-doctor -
 
 识别 JDK、SDK、依赖、签名、缓存、测试与 APK 路径等常见失败信号。**规则匹配不是自动修复，也不能替代对最早失败信息的检查**。根因与连带错误可能同时命中；不要把每条命中都当作独立故障。脱敏不是安全边界；不会执行日志里的命令，也不会访问网络。
 
+
+## 实跑结果与使用案例
+
+本次运行命中 **2 条规则**：`SIGN-01` 首次出现在 L3，`APK-01` 出现在 L4。报告先列签名线索，保留相邻上下文；这表示排查顺序，不是自动确认根因。
+
+[查看运行过程与读结果的方法](docs/DEMO.md) · [查看未经改写的 JSON 输出](examples/showcase/output.json)
+
 ## 参与 / Help Wanted
 
 欢迎提交**已经去敏**的失败片段，并标注预期规则和误报反例。下一步可做 Gradle 版本矩阵核验、因果链排序与 SARIF 输出。验证代码：`python -m unittest discover -s tests`。
@@ -135,16 +132,12 @@ CI 会对每份日志重新运行分析器，并要求实际 Rule ID 与期望�
 - [LR-Agent](https://github.com/LLR6/LR-agent) — broader automation and reliability experiments.
 <!-- LR-RELATED:END -->
 
-<!-- LR-ENGINEERING-REF:START -->
-## Engineering Reference
+<details>
+<summary>工程文档与兼容性</summary>
 
-[Architecture](docs/ARCHITECTURE.md) · [Triage model](docs/TRIAGE_MODEL.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Report schema](schemas/report.schema.json)
+[Architecture](./docs/ARCHITECTURE.md) · [Benchmarks](./docs/BENCHMARKS.md) · [Triage model](./docs/TRIAGE_MODEL.md) · [Roadmap](./docs/ROADMAP.md) · [Compatibility](./docs/COMPATIBILITY.md) · [Releasing](./docs/RELEASING.md) · [Security](./SECURITY.md) · [Support](./SUPPORT.md)
+ · [Change risk](./docs/CHANGE_RISK.md) · [Failure modes](./docs/FAILURE_MODES.md)
 
-These files document the project's architecture, safety boundaries, reproducibility assumptions and release process.
-<!-- LR-ENGINEERING-REF:END -->
+[贡献说明](CONTRIBUTING.md) · [版本记录](CHANGELOG.md) · [输出格式](schemas)
 
-<!-- LR-LAB-FOOTER:START -->
----
-<p align="center"><sub>Part of <a href="https://github.com/LLR6">LR Lab</a> · Security × AI × Android × Automation</sub><br><sub>Build things that are useful, inspectable, and reproducible.</sub></p>
-<!-- LR-LAB-FOOTER:END -->
-
+</details>

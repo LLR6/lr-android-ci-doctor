@@ -1,0 +1,57 @@
+{
+  "schema": "lr-ci-doctor/v1",
+  "findings": [
+    {
+      "id": "SIGN-01",
+      "title": "签名配置缺失",
+      "fix": "确认签名文件和密钥仅通过 CI Secrets 注入，核对路径与 alias；不要将密钥写入仓库。",
+      "priority": 95,
+      "first_line": 3,
+      "evidence": [
+        {
+          "line": 3,
+          "text": "> Keystore file '/home/runner/work/app/release.jks' not found for signing config 'release'.",
+          "context": [
+            {
+              "line": 2,
+              "text": "Execution failed for task ':app:validateSigningRelease'."
+            },
+            {
+              "line": 3,
+              "text": "> Keystore file '/home/runner/work/app/release.jks' not found for signing config 'release'."
+            },
+            {
+              "line": 4,
+              "text": "Error: No files were found with the provided path: app/build/outputs/apk/release/*.apk"
+            }
+          ]
+        }
+      ],
+      "occurrences": 1
+    },
+    {
+      "id": "APK-01",
+      "title": "产物路径不匹配",
+      "fix": "检查 assemble 任务、变体名与实际 APK/AAB 路径，再修改上传 artifact 的 glob。",
+      "priority": 45,
+      "first_line": 4,
+      "evidence": [
+        {
+          "line": 4,
+          "text": "Error: No files were found with the provided path: app/build/outputs/apk/release/*.apk",
+          "context": [
+            {
+              "line": 3,
+              "text": "> Keystore file '/home/runner/work/app/release.jks' not found for signing config 'release'."
+            },
+            {
+              "line": 4,
+              "text": "Error: No files were found with the provided path: app/build/outputs/apk/release/*.apk"
+            }
+          ]
+        }
+      ],
+      "occurrences": 1
+    }
+  ]
+}
